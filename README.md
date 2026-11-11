@@ -22,6 +22,7 @@ Google Merchandise Store의 GA4 이벤트 로그(약 3개월, 일 4천여 명 �
 - 미국·캐나다·인도의 단계별 퍼널도 모든 구간에서 차이가 1.4%p 이내로 거의 같다. 방문자의 약 77%가 상품을 보지 않고, 상품 조회자의 약 79%가 장바구니에 담지 않아 **병목은 전 시장 공통의 앞단**이다. 국가별 현지화보다 공통 앞단 개선이 우선이다. ([04](notes/04_user_level_funnel.md))
 - 이벤트 순서를 검증하면 **장바구니 → 결제 시작 전환율이 약 77%에서 약 37%로 절반 이하**가 된다. 순서대로 장바구니에 담은 유저의 약 63%가 결제를 시작하지 않아, 장바구니 이탈이 세 번째 병목으로 드러났다. 정상 경로로 구매한 유저는 전체 구매자의 절반 남짓이다. ([05](notes/05_ordered_funnel.md))
 - 신규 유저의 30일 리텐션은 10.6%로, **약 89%가 한 달 안에 돌아오지 않는다.** 특히 연말 시즌 코호트는 유입이 가장 많았지만 30일 리텐션이 11월 평균 12.8%에서 12월 8.3%로 떨어졌다. 시즌 유입은 규모가 아닌 코호트 리텐션으로 평가해야 한다. ([06](notes/06_cohort_retention.md))
+- 첫날 상품을 본 신규 유저의 30일 리텐션은 17.7%로, 보지 않은 유저(8.3%)의 **2.1배**다. 신규 유저의 78.6%가 이 경계에 걸려 있어 **"첫 방문일 상품 상세 조회"를 Activation 기준**으로 정했다. 인과 검증을 위해 첫 화면 상품 노출 A/B 테스트를 설계한다. ([07](notes/07_activation.md))
 
 ## Approach
 
@@ -33,7 +34,7 @@ Google Merchandise Store의 GA4 이벤트 로그(약 3개월, 일 4천여 명 �
 | 04 | 유저 단위 퍼널 (미국·캐나다·인도) | 유저당 1행 변환, 0/1 플래그 집계 | [notes](notes/04_user_level_funnel.md) · [sql](sql/04_user_level_funnel.sql) |
 | 05 | 순서 기반 퍼널 | 단계별 최초 시각, 다층 CTE로 순서 검증 | [notes](notes/05_ordered_funnel.md) · [sql](sql/05_ordered_funnel.sql) |
 | 06 | 코호트 리텐션 | 신규 유저 주간 코호트, 누적 리텐션, JOIN·날짜 함수 | [notes](notes/06_cohort_retention.md) · [sql](sql/06_cohort_retention.sql) |
-| 07 | Activation 정의 및 국가 비교 | 초기 행동별 리텐션 비교 | 진행 예정 |
+| 07 | Activation 정의 | 첫날 행동 세그먼트(CASE WHEN)별 30일 리텐션 비교 | [notes](notes/07_activation.md) · [sql](sql/07_activation.sql) |
 | 08 | A/B 테스트 설계 및 검정 | 표본 크기 산정, 두 비율 z-검정 | 진행 예정 |
 | 09 | 대시보드 및 최종 보고서 | Tableau | 진행 예정 |
 

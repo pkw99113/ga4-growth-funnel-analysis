@@ -35,7 +35,7 @@ Google Merchandise Store의 GA4 이벤트 로그(약 3개월, 일 4천여 명 �
 | 05 | 순서 기반 퍼널 | 단계별 최초 시각, 다층 CTE로 순서 검증 | [notes](notes/05_ordered_funnel.md) · [sql](sql/05_ordered_funnel.sql) |
 | 06 | 코호트 리텐션 | 신규 유저 주간 코호트, 누적 리텐션, JOIN·날짜 함수 | [notes](notes/06_cohort_retention.md) · [sql](sql/06_cohort_retention.sql) |
 | 07 | Activation 정의 | 첫날 행동 세그먼트(CASE WHEN)별 30일 리텐션 비교 | [notes](notes/07_activation.md) · [sql](sql/07_activation.sql) |
-| 08 | A/B 테스트 설계 및 검정 | 표본 크기 산정, 두 비율 z-검정 | 진행 예정 |
+| 08 | A/B 테스트 설계 및 검정 | 지표 체계(주·보조·가드레일), 표본 크기 산정, 두 비율 z-검정 | [design](notes/08_ab_test_design.md) · 분석 진행 중 |
 | 09 | 대시보드 및 최종 보고서 | Tableau | 진행 예정 |
 
 ## Data

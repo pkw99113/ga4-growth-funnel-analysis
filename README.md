@@ -2,6 +2,10 @@
 
 Google Merchandise Store의 GA4 이벤트 로그(약 3개월, 일 4천여 명 방문)를 BigQuery로 분석해, **신규 방문자가 구매와 재방문에 이르지 못하는 지점**을 찾고 개선 우선순위와 검증용 A/B 테스트를 설계한다.
 
+> 📄 **[분석 보고서 (REPORT.md)](REPORT.md)** · 📊 대시보드: 아래 이미지 (Tableau Public 링크 추가 예정)
+
+![Dashboard](images/09_dashboard.png)
+
 ## Business Question
 
 > 신규 방문자의 대부분이 첫 구매 없이 이탈한다. **어느 단계에서, 어떤 유저가** 이탈하며, 무엇을 먼저 개선해야 하는가?
@@ -9,12 +13,10 @@ Google Merchandise Store의 GA4 이벤트 로그(약 3개월, 일 4천여 명 �
 세부 질문
 1. 첫 방문에서 구매까지의 퍼널 중 이탈이 가장 큰 구간은 어디인가
 2. 재방문(리텐션)을 예측하는 초기 행동, 즉 Activation 기준은 무엇인가
-3. 국가(미국, 캐나다, 인도)와 유입 채널, 기기에 따라 퍼널과 리텐션은 어떻게 다른가
+3. 국가(미국, 캐나다, 인도)에 따라 퍼널은 어떻게 다른가
 4. 가장 큰 개선 기회를 검증하려면 어떤 실험을 설계해야 하는가
 
 ## Key Findings
-
-> 분석 진행에 따라 업데이트
 
 - 2020-12-01 기준 유저 4,308명이 이벤트 71,804건을 남겼다(1인당 약 16.7건). 유저 여정 샘플에서 프로모션 배너에는 반응했지만 상품 상세에 도달하지 못하고 첫 세션에서 이탈하는 패턴을 확인했고, 이를 이후 퍼널 분석의 가설로 삼았다. ([01](notes/01_explore_data.md))
 - 방문자의 구매 전환율은 2.3%이며, **가장 큰 이탈은 방문 → 상품 조회 구간**이다. 방문자의 72.5%가 상품 상세를 보지 않고 이탈한 반면, 결제 시작 이후 단계의 전환율은 51~73%로 상대적으로 높다. 결제 개선보다 첫 방문 유저의 상품 도달이 우선 과제라는 가설을 세웠다. ([02](notes/02_event_overview.md))
@@ -37,7 +39,7 @@ Google Merchandise Store의 GA4 이벤트 로그(약 3개월, 일 4천여 명 �
 | 06 | 코호트 리텐션 | 신규 유저 주간 코호트, 누적 리텐션, JOIN·날짜 함수 | [notes](notes/06_cohort_retention.md) · [sql](sql/06_cohort_retention.sql) |
 | 07 | Activation 정의 | 첫날 행동 세그먼트(CASE WHEN)별 30일 리텐션 비교 | [notes](notes/07_activation.md) · [sql](sql/07_activation.sql) |
 | 08 | A/B 테스트 설계 및 검정 | 지표 체계(주·보조·가드레일), 표본 크기 산정, 두 비율 z-검정 | [design](notes/08_ab_test_design.md) · [result](notes/08_ab_test_result.md) · [code](notebooks/08_ab_test_analysis.py) |
-| 09 | 대시보드 및 최종 보고서 | Tableau | 진행 예정 |
+| 09 | 대시보드 및 최종 보고서 | Tableau 대시보드, 보고서 | [report](REPORT.md) · [data](data/) |
 
 ## Data
 
@@ -56,10 +58,12 @@ Google Merchandise Store의 GA4 이벤트 로그(약 3개월, 일 4천여 명 �
 .
 ├── sql/        분석 단계별 BigQuery 쿼리
 ├── notebooks/  Python 분석 (A/B 테스트)
-├── images/     결과 그래프
-└── notes/      단계별 분석 목적, 결과, 해석
+├── images/     결과 그래프, 대시보드
+├── notes/      단계별 분석 목적, 결과, 해석
+├── data/       대시보드용 집계 CSV
+└── REPORT.md   최종 분석 보고서
 ```
 
 ## Tech Stack
 
-BigQuery (Standard SQL) · Python (pandas, statsmodels) · Tableau
+BigQuery (Standard SQL) · Python (pandas, scipy, statsmodels, matplotlib) · Tableau Public

@@ -1,0 +1,13 @@
+country,users,stage,step_conversion_pct,reach_from_visit_pct
+United States,118493,1_상품 조회,22.7,22.7
+United States,118493,2_장바구니,18.4,4.18
+United States,118493,3_결제 시작,37.2,1.55
+United States,118493,4_구매,57.4,0.89
+India,25367,1_상품 조회,22.8,22.8
+India,25367,2_장바구니,17.8,4.06
+India,25367,3_결제 시작,36.6,1.49
+India,25367,4_구매,55.0,0.82
+Canada,20268,1_상품 조회,23.0,23.0
+Canada,20268,2_장바구니,19.3,4.44
+Canada,20268,3_결제 시작,38.0,1.69
+Canada,20268,4_구매,55.4,0.93
